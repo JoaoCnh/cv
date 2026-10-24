@@ -1,0 +1,64 @@
+---
+import Header from '../components/Header.astro';
+
+interface Props {
+  title: string;
+  name: string;
+  description?: string;
+}
+
+const { title, name, description = '' } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <Header name={name} />
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --bg: #fff;
+    --text: #111;
+    --muted: #444;
+    --rule: #e5e5e5;
+    --link: #111;
+    --header-bg: rgb(255 255 255 / 0.85);
+    color-scheme: light dark;
+  }
+
+  /* Follows the visitor's system setting; no toggle needed */
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #121212;
+      --text: #f2f2f2;
+      --muted: #b5b5b5;
+      --rule: #2e2e2e;
+      --link: #f2f2f2;
+      --header-bg: rgb(18 18 18 / 0.85);
+    }
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 4rem; /* keeps anchored sections clear of the sticky header */
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+  }
+</style>

@@ -6,7 +6,7 @@ The source code for my personal website: a navigable, always up-to-date CV built
 
 ## What this is
 
-Instead of a static PDF, my CV is a small website you can browse: experience, projects, skills and writing, each a page of its own. 
+Instead of a static PDF, my CV is a small website you can browse: experience, projects, skills and writing, each a page of its own.
 It started from Astro's blog template and has been reshaped into a CV.
 
 ## Built with

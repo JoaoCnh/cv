@@ -1,0 +1,201 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { cv } from '../data/cv';
+---
+
+<Layout title={`${cv.name} | ${cv.headline}`} name={cv.name} description={`${cv.name} - ${cv.headline}`}>
+  <main class="page" id="top">
+        <header class="masthead">
+          <h1>{cv.name}</h1>
+          <p class="headline">{cv.headline}</p>
+          <p class="contact">
+            <a href={`mailto:${cv.email}`}>{cv.email}</a> | {cv.location}
+          </p>
+        </header>
+
+        <section id="summary">
+          <h2>Professional Summary</h2>
+          <p>{cv.summary}</p>
+        </section>
+
+        <section id="experience">
+          <h2>Work Experience</h2>
+          {
+            cv.experience.map((job) => (
+              <article class="job">
+                <div class="row">
+                  <h3>{job.title}</h3>
+                  <span class="period">{job.period}</span>
+                </div>
+                <p class="company">{job.company}</p>
+                <ul>
+                  {job.highlights.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              </article>
+            ))
+          }
+        </section>
+
+        <section id="education">
+          <h2>Education</h2>
+          {
+            cv.education.map((edu) => (
+              <div class="edu">
+                <strong>{edu.school}</strong>
+                <p>{edu.degree}</p>
+                <strong>{edu.period}</strong>
+              </div>
+            ))
+          }
+        </section>
+
+        <section id="skills">
+          <h2>Skills</h2>
+          <ul class="skills">
+            {cv.skills.map((skill) => <li>{skill}</li>)}
+          </ul>
+        </section>
+      </main>
+</Layout>
+
+<style>
+  .page {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+  }
+
+  /* Header */
+  .masthead {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: end;
+    row-gap: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 6px solid var(--rule);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    margin: 0;
+    font-size: clamp(2rem, 6vw, 3rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+
+  .headline {
+    margin: 0;
+    font-weight: 700;
+  }
+
+  .contact {
+    grid-column: 1 / -1;
+    margin: 0;
+    text-align: right;
+    color: var(--muted);
+  }
+
+  .contact a {
+    color: var(--link);
+    text-decoration: none;
+  }
+
+  .contact a:hover {
+    text-decoration: underline;
+  }
+
+  /* Sections */
+  section {
+    margin-top: 2rem;
+  }
+
+  h2 {
+    margin: 0 0 0.5rem;
+    font-size: 1.1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  /* Jobs */
+  .job {
+    margin-top: 1.25rem;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+
+  h3 {
+    margin: 0;
+    font-size: 1rem;
+  }
+
+  .period {
+    font-weight: 700;
+    white-space: nowrap;
+  }
+
+  .company {
+    color: var(--muted);
+  }
+
+  ul {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+  }
+
+  li + li {
+    margin-top: 0.15rem;
+  }
+
+  /* Education */
+  .edu p {
+    color: var(--muted);
+  }
+
+  /* Skills: two columns, filled top to bottom like the PDF */
+  .skills {
+    columns: 2;
+    column-gap: 3rem;
+    margin: 0;
+  }
+
+  .skills li {
+    break-inside: avoid;
+  }
+
+  @media (max-width: 40rem) {
+    .page {
+      padding-top: 2rem;
+    }
+
+    .masthead {
+      grid-template-columns: 1fr;
+    }
+
+    .contact {
+      text-align: left;
+    }
+
+    .skills {
+      columns: 1;
+    }
+  }
+
+  @media print {
+    .page {
+      padding: 0;
+    }
+  }
+</style>
