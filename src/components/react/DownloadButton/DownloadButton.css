@@ -1,0 +1,62 @@
+.download-cv {
+  position: fixed;
+  right: max(1.25rem, env(safe-area-inset-right));
+  bottom: max(1.25rem, env(safe-area-inset-bottom));
+  z-index: 20;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  background: var(--text);
+  color: var(--bg);
+  font-size: 0.95rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 4px 14px rgb(0 0 0 / 0.25);
+
+  opacity: 0;
+  transform: translateY(0.75rem);
+  pointer-events: none;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.download-cv.is-visible {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+.download-cv:hover {
+  transform: translateY(-2px);
+}
+
+.download-cv:focus-visible {
+  outline: 3px solid var(--muted);
+  outline-offset: 3px;
+}
+
+@media (max-width: 30rem) {
+  /* icon-only on small screens */
+  .download-cv span {
+    display: none;
+  }
+
+  .download-cv {
+    padding: 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .download-cv {
+    transition: none;
+  }
+}
+
+@media print {
+  .download-cv {
+    display: none;
+  }
+}
