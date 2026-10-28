@@ -1,11 +1,18 @@
-export type Job = {
+export interface Stat {
+  value: number;
+  suffix: string;
+  label: string;
+}
+
+export interface Job {
   title: string;
   company: string;
   period: string;
   highlights: string[];
+  stats?: Stat[];
 }
 
-export type Education = {
+export interface Education {
   school: string;
   degree: string;
   period: string;
@@ -20,6 +27,11 @@ export const cv = {
   summary:
     'Full-Stack Software Engineer with over 10 years of experience in designing, developing, and maintaining robust, scalable software systems. Proficient in React, TypeScript, Node.js, PostgreSQL, AWS, Docker, and related technologies, with experience delivering end-to-end solutions across web and mobile platforms. A collaborative and results-driven professional committed to writing high-quality code, solving complex technical challenges, and contributing to the success of cross-functional teams.',
 
+  stats: [
+    { value: 10, suffix: '+', label: 'years of experience' },
+    { value: 50, suffix: '+', label: 'production delivered projects' },
+  ],
+
   experience: [
     {
       title: 'Senior Staff Software Engineer',
@@ -32,9 +44,24 @@ export const cv = {
         "Led the effort to reduce the main application's bundle size by 60% improving page load performance significantly;",
         'Led the effort to migrate from Jest to Vitest. Reduced test execution time by 31% while increasing test coverage, improving efficiency and scalability.',
         'Implemented a custom visual regression testing plugin for Vitest for a design system; Vitest did not support it at the moment.',
+        'Created an integration testing system using Playwright to separate unit testing from actual integration testing',
         'Built a React Native all-in-one crypto and cash app;',
         "Built the app's marketing website using Next.js (https://hold.io);",
         'Built a custom backoffice app for managers and support to help customers;',
+      ],
+      stats: [
+        { value: 60, suffix: '%', label: 'reduced main bundle size' },
+        {
+          value: 31,
+          suffix: '%',
+          label: 'improved test runtime (Jest to Vitest migration)',
+        },
+        { value: 200, suffix: '+', label: 'tests added' },
+        {
+          value: 120,
+          suffix: 'secs',
+          label: 'shaved across CI/CD pipelines runtime',
+        },
       ],
     },
     {
@@ -50,6 +77,19 @@ export const cv = {
         "Developed a React Native mobile application for Portugal's Health Regulatory Authority to facilitate the registration and management of inspections at healthcare establishments, including private clinics. Integrated API-driven dynamic forms to retrieve and render complex form structures, enabling data capture and storage, with offline functionality to support reliable operation without an internet connection.",
         'Developed multiple React Native mobile applications for municipal authorities, integrating with a custom-built CMS to retrieve, display, and manage dynamic content. Implemented API integrations to ensure content was delivered efficiently and consistently across applications.',
       ],
+      stats: [
+        { value: 10, suffix: '+', label: 'apps shipped across web and mobile' },
+        {
+          value: 220,
+          suffix: '+',
+          label: 'municipal websites running on the CMS',
+        },
+        {
+          value: 50,
+          suffix: '%',
+          label: 'improvement on LCP on all CMS delivered pages',
+        },
+      ],
     },
   ] satisfies Job[],
 
@@ -62,12 +102,16 @@ export const cv = {
   ] satisfies Education[],
 
   skills: [
+    'Software Design & Principles',
+    'System Design',
     'React Expert',
     'TypeScript',
     'Next.js and SvelteKit',
     'Svelte, Vue and Solid.js',
     'CSS, SCSS, Tailwind',
     'Vite and Vitest',
+    'Playwright',
+    'CI/CD Optimisation',
     'React Native',
     'Node.js',
     '.NET',
@@ -75,6 +119,5 @@ export const cv = {
     'PHP',
     'Golang',
     'PostgreSQL, SQLServer and MySQL',
-    'Software Design & Principles',
   ],
 };
