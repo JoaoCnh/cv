@@ -1,0 +1,120 @@
+.tech {
+  display: grid;
+  gap: 1.75rem;
+  margin-top: 1.5rem;
+}
+
+.tech__heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 1rem;
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.tech__heading small {
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 400;
+}
+
+.tech__list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(5.5rem, 1fr));
+  gap: 0.75rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.tech__item {
+  /* brand color mixed with the text color, so dark logos stay visible in dark mode */
+  --tone: color-mix(in srgb, var(--brand) 65%, var(--text));
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0.25rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.75rem;
+  text-align: center;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.tech__icon {
+  width: 1.75rem;
+  height: 1.75rem;
+  fill: var(--tone);
+  animation: tech-bob 4s ease-in-out infinite;
+  animation-delay: calc(var(--i) * -0.35s);
+}
+
+.tech__glyph {
+  display: grid;
+  place-items: center;
+  width: 1.75rem;
+  height: 1.75rem;
+  color: var(--tone);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.tech__name {
+  color: var(--muted);
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+/* highlight the hovered tech everywhere, dim the rest */
+.tech__item.is-active {
+  transform: translateY(-3px) scale(1.05);
+  border-color: var(--tone);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--tone) 25%, transparent);
+}
+
+.tech__item.is-dim {
+  opacity: 0.35;
+}
+
+/* entrance: staggered pop-in, starting once the island has mounted */
+.is-ready .tech__item {
+  animation: tech-pop 0.5s ease backwards;
+  animation-delay: calc(var(--i) * 45ms);
+}
+
+@keyframes tech-pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.9);
+  }
+}
+
+@keyframes tech-bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tech__item,
+  .tech__icon {
+    animation: none !important;
+    transition: none;
+  }
+}
+
+@media print {
+  .tech {
+    display: none;
+  }
+}

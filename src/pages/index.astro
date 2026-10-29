@@ -2,6 +2,8 @@
 import Layout from '../layouts/Layout.astro';
 import { cv } from '../data/cv';
 import ImpactStats from '../components/svelte/ImpactStats.svelte';
+import TechStack from '../components/solid/TechStack';
+import { resolveStack } from '../lib/icons';
 ---
 
 <Layout title={`${cv.name} | ${cv.headline}`} name={cv.name} description={`${cv.name} - ${cv.headline}`}>
@@ -36,6 +38,7 @@ import ImpactStats from '../components/svelte/ImpactStats.svelte';
                   ))}
                 </ul>
                 {job.stats ? <ImpactStats client:visible stats={job.stats} /> : null}
+                <TechStack client:visible stack={resolveStack(job.stack)} />
               </article>
             ))
           }

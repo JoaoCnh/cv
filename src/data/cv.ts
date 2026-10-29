@@ -4,12 +4,19 @@ export interface Stat {
   label: string;
 }
 
+export interface Tech {
+  name: string;
+  /** simple-icons slug(s), tried in order. Leave out for a text-only tile. */
+  icon?: string | string[];
+}
+
 export interface Job {
   title: string;
   company: string;
   period: string;
   highlights: string[];
   stats?: Stat[];
+  stack: Tech[];
 }
 
 export interface Education {
@@ -37,6 +44,23 @@ export const cv = {
       title: 'Senior Staff Software Engineer',
       company: 'Mindera',
       period: 'May 2019 - Present',
+      stack: [
+        { name: 'React', icon: 'react' },
+        { name: 'React Native', icon: 'react' },
+        { name: 'TypeScript', icon: 'typescript' },
+        { name: 'Emotion', icon: 'emotion' },
+        { name: 'CSS', icon: ['css', 'css3'] },
+        { name: 'CSS Modules', icon: ['cssmodules', 'css3'] },
+        { name: 'Node.js', icon: 'nodedotjs' },
+        { name: 'DynamoDB & AWS', icon: ['amazondynamodb', 'amazonaws'] },
+        { name: 'Next.js', icon: 'nextdotjs' },
+        { name: 'Webpack', icon: 'webpack' },
+        { name: 'Vite', icon: 'vite' },
+        { name: 'Vitest', icon: 'vitest' },
+        { name: 'Cypress', icon: 'cypress' },
+        { name: 'Playwright', icon: 'playwright' },
+        { name: 'Tailwind', icon: 'tailwindcss' },
+      ],
       highlights: [
         'Built (from the ground-up) the new Homepage & Landing Page experiences for the Burberry website (Next.js, Node.js, React, TypeScript);',
         'Led the effort to create a full fledged Design System with extensive test coverage. Unit, Integration and Screenshot testing.',
@@ -68,6 +92,30 @@ export const cv = {
       title: 'Software Engineer',
       company: 'Wiremaze',
       period: 'Aug 2014 - May 2019',
+      stack: [
+        { name: 'Ruby on Rails', icon: 'rubyonrails' },
+        { name: '.NET', icon: 'dotnet' },
+        { name: 'PHP & Laravel', icon: ['laravel', 'php'] },
+        { name: 'Golang', icon: 'go' },
+        { name: 'Node.js', icon: 'nodedotjs' },
+        { name: 'PostgreSQL', icon: 'postgresql' },
+        { name: 'SQL Server', icon: 'microsoftsqlserver' },
+        { name: 'MySQL', icon: 'mysql' },
+        { name: 'SQLite', icon: 'sqlite' },
+        { name: 'Angular', icon: 'angular' },
+        { name: 'React', icon: 'react' },
+        { name: 'React Native', icon: 'react' },
+        { name: 'Handlebars.js', icon: 'handlebarsdotjs' },
+        { name: 'JavaScript', icon: 'javascript' },
+        { name: 'CSS', icon: 'css' },
+        { name: 'SCSS', icon: 'sass' },
+        { name: 'styled components', icon: 'styledcomponents' },
+        { name: 'Jest', icon: 'jest' },
+        { name: 'Gulp', icon: 'gulp' },
+        { name: 'Grunt', icon: 'grunt' },
+        { name: 'Webpack', icon: 'webpack' },
+        { name: 'Cypress', icon: 'cypress' },
+      ],
       highlights: [
         "Added features to and maintained a complex CMS system used to build municipalities' websites;",
         'Built and maintained CMS systems using Ruby on Rails, Laravel, and .NET;',
