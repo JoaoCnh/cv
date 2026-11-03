@@ -1,0 +1,200 @@
+---
+import { Image } from 'astro:assets';
+import type { CollectionEntry } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+import Layout from './Layout.astro';
+import { cv } from '../data/cv';
+
+type Props = CollectionEntry<'blog'>['data'];
+
+const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+---
+
+<Layout title={`${title} | ${cv.name}`} name={cv.name} description={description}>
+  <main class="post">
+    <a class="back" href="/blog">&larr; All posts</a>
+
+    <header class="intro">
+      <p class="meta">
+        <FormattedDate date={pubDate} />
+        {
+          updatedDate && (
+            <span class="updated">
+              &middot; Updated <FormattedDate date={updatedDate} />
+            </span>
+          )
+        }
+      </p>
+      <h1>{title}</h1>
+    </header>
+
+    {
+      heroImage && (
+        <div class="hero">
+          <Image width={1020} height={510} src={heroImage} alt="" />
+        </div>
+      )
+    }
+
+    <article class="prose">
+      <slot />
+    </article>
+  </main>
+</Layout>
+
+<style>
+  .post {
+    max-width: 52rem;
+    margin: 0 auto;
+    padding: 2rem 1.5rem 5rem;
+  }
+
+  .back {
+    display: inline-block;
+    margin-bottom: 1.5rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+    text-decoration: none;
+  }
+
+  .back:hover {
+    color: var(--text);
+    text-decoration: underline;
+  }
+
+  /* same thick grey rule as the CV masthead and the blog index */
+  .intro {
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+    border-bottom: 6px solid var(--rule);
+  }
+
+  .meta {
+    margin: 0 0 0.5rem;
+    color: var(--muted);
+    font-size: 0.9rem;
+  }
+
+  .intro h1 {
+    margin: 0;
+    font-size: clamp(1.9rem, 5vw, 2.75rem);
+    line-height: 1.15;
+  }
+
+  .hero {
+    margin-bottom: 2.5rem;
+  }
+
+  .hero :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    border-radius: 0.75rem;
+  }
+
+  /* Markdown content is rendered through the slot, so it needs :global selectors */
+  .prose {
+    max-width: 44rem;
+    font-size: 1.05rem;
+    line-height: 1.7;
+  }
+
+  .prose :global(h2),
+  .prose :global(h3),
+  .prose :global(h4) {
+    margin: 2.25rem 0 0.75rem;
+    line-height: 1.25;
+  }
+
+  .prose :global(h2) {
+    font-size: 1.5rem;
+  }
+
+  .prose :global(h3) {
+    font-size: 1.2rem;
+  }
+
+  .prose :global(p),
+  .prose :global(ul),
+  .prose :global(ol),
+  .prose :global(pre),
+  .prose :global(blockquote),
+  .prose :global(table) {
+    margin: 0 0 1.25rem;
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    padding-left: 1.5rem;
+  }
+
+  .prose :global(li + li) {
+    margin-top: 0.35rem;
+  }
+
+  .prose :global(a) {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  .prose :global(a:hover) {
+    text-decoration-thickness: 2px;
+  }
+
+  .prose :global(blockquote) {
+    padding: 0.25rem 0 0.25rem 1.25rem;
+    border-left: 4px solid var(--rule);
+    color: var(--muted);
+  }
+
+  .prose :global(code) {
+    padding: 0.15em 0.35em;
+    border-radius: 0.3rem;
+    background: color-mix(in srgb, var(--text) 9%, transparent);
+    font-size: 0.9em;
+  }
+
+  .prose :global(pre) {
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    border: 1px solid var(--rule);
+    border-radius: 0.75rem;
+    font-size: 0.9rem;
+    line-height: 1.55;
+  }
+
+  /* code inside a block shouldn't get the inline-code pill */
+  .prose :global(pre code) {
+    padding: 0;
+    background: none;
+    font-size: inherit;
+  }
+
+  .prose :global(img) {
+    max-width: 100%;
+    height: auto;
+    border-radius: 0.5rem;
+  }
+
+  .prose :global(hr) {
+    margin: 2.5rem 0;
+    border: 0;
+    border-top: 1px solid var(--rule);
+  }
+
+  .prose :global(table) {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+  }
+
+  .prose :global(th),
+  .prose :global(td) {
+    padding: 0.5rem 0.75rem;
+    border: 1px solid var(--rule);
+    text-align: left;
+  }
+</style>

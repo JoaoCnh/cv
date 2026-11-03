@@ -6,15 +6,16 @@ interface Props {
 const { name } = Astro.props;
 
 const links = [
-  { href: '#summary', label: 'Summary' },
-  { href: '#experience', label: 'Experience' },
-  { href: '#education', label: 'Education' },
-  { href: '#skills', label: 'Skills' },
+  { href: '/#summary', label: 'Summary' },
+  { href: '/#experience', label: 'Experience' },
+  { href: '/#education', label: 'Education' },
+  { href: '/#skills', label: 'Skills' },
+  { href: '/blog', label: 'Blog' },
 ];
 ---
 
 <header class="site-header">
-  <a class="name" href="#top">{name}</a>
+  <a class="name" href="/">{name}</a>
   <nav aria-label="Sections">
     <ul>
       {
