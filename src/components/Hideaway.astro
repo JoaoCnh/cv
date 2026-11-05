@@ -1,0 +1,71 @@
+---
+interface Props {
+  title?: string;
+  open?: boolean;
+}
+
+const { title = 'Show more', open = false } = Astro.props;
+---
+
+<details class="hideaway" open={open}>
+  <summary>{title}</summary>
+  <div class="hideaway__content">
+    <slot />
+  </div>
+</details>
+
+<style>
+  .hideaway {
+    margin: 1.5rem 0;
+    border: 1px solid var(--rule);
+    border-radius: 0.75rem;
+  }
+
+  summary {
+    padding: 0.75rem 1.1rem;
+    cursor: pointer;
+    font-weight: 600;
+    list-style: none;
+    user-select: none;
+  }
+
+  /* custom chevron instead of the browser's default marker */
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::before {
+    content: '▸';
+    display: inline-block;
+    margin-right: 0.6rem;
+    color: var(--muted);
+    transition: transform 0.2s ease;
+  }
+
+  details[open] > summary::before {
+    transform: rotate(90deg);
+  }
+
+  summary:hover {
+    color: var(--muted);
+  }
+
+  .hideaway__content {
+    padding: 0 1.1rem 1rem;
+    border-top: 1px solid var(--rule);
+  }
+
+  .hideaway__content :global(> :first-child) {
+    margin-top: 1rem;
+  }
+
+  .hideaway__content :global(> :last-child) {
+    margin-bottom: 0;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    summary::before {
+      transition: none;
+    }
+  }
+</style>

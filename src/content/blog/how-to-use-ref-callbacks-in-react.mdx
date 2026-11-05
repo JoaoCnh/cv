@@ -1,0 +1,123 @@
+---
+title: 'How to use ref callbacks in React'
+description: 'A tutorial on how React refs are simplified with ref callbacks'
+pubDate: '2022-11-23'
+heroImage: '../../assets/blog-how-to-use-ref-callbacks-in-react.png'
+---
+
+import Callout from '../../components/Callout.astro';
+
+I'm sure you're familiar with the [useRef](https://react.dev/reference/react/useRef) hook.
+
+And I'm willing to wager you're accustomed to using it like this
+
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+return <input ref={inputRef} />;
+```
+
+**And** if you wanted to focus said input, you'd probably reach for a [useEffect](https://react.dev/reference/react/useEffect).
+
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+useEffect(function focusInput() {
+  inputRef.current?.focus();
+}, []);
+
+return <input ref={inputRef} />;
+```
+
+What if I told you there is a better way? 😏
+
+## Welcome ref callbacks
+
+React refs are not just objects. They can be functions too!
+
+```ts
+type RefCallback<T> = {
+  bivarianceHack(instance: T | null): void;
+}["bivarianceHack"];
+type Ref<T> = RefCallback<T> | RefObject<T> | null;
+```
+
+So we can do something like this
+
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+<input ref={(el) => (inputRef.current = el)} />;
+```
+
+Basically, every render, this `ref` function will run and set the value with the variable `el` as a `HTMLInputElement` node.
+
+But this is not really good is it? We don't want to re-run this over and over as a user interacts with our application.
+
+Well, we can thank [useCallback](https://react.dev/reference/react/useCallback) for coming to the rescue!
+
+So, we have all the ingredients for a really nice cake 🍰
+
+Let's mix them together!
+
+### Focusing an Input
+
+```tsx
+const inputRef = useRef<HTMLInputElement>(null);
+
+const inputRefCallback = useCallback(
+  (el: HTMLInputElement | null) => {
+    if (el) {
+      el.focus();
+    }
+  },
+  []
+)
+
+<input ref={inputRefCallback} />
+```
+
+<Callout type="warning" title="Seriously, remember memoization">
+
+Remember to use memoization so you're not focusing your input on every render, not only would that be wrong, it would be _really_ annoying.
+
+</Callout>
+
+### Measuring a container
+
+```tsx
+type Dimensions = { width: number; height: number };
+
+const [dimensions, setDimensions] = useState<Dimensions>({ width: 0, height: 0 });
+
+const divRefCallback = useCallback(
+  (el: HTMLDivElement | null) => {
+    if (el) {
+      const { width, height } = el.getBoundingClientRect();
+      setDimensions({ width, height });
+    }
+  },
+  []
+)
+
+<div ref={divRefCallback}>{children}</div>
+```
+
+### Starting a game on a canvas
+
+```tsx
+const canvasRefCallback = useCallback(
+  (el: HTMLCanvasElement | null) => {
+    if (el) {
+      new GameEngine(el).start();
+    }
+  },
+  []
+)
+
+<canvas ref={canvasRefCallback} />
+```
+
+And that's it! 🚀
+
+Hope you learned something new and this becomes useful on your dev journey.

@@ -1,0 +1,70 @@
+---
+interface Props {
+  type?: 'note' | 'tip' | 'warning' | 'danger';
+  title?: string;
+}
+
+const { type = 'note', title } = Astro.props;
+
+const labels = {
+  note: 'Note',
+  tip: 'Tip',
+  warning: 'Warning',
+  danger: 'Danger',
+};
+---
+
+<aside class={`callout callout--${type}`}>
+  <p class="callout__title">{title ?? labels[type]}</p>
+  <div class="callout__body">
+    <slot />
+  </div>
+</aside>
+
+<style>
+  .callout {
+    --accent: #3b82f6;
+
+    margin: 1.5rem 0;
+    padding: 0.85rem 1.1rem;
+    border: 1px solid color-mix(in srgb, var(--accent) 35%, var(--rule));
+    border-left: 4px solid var(--accent);
+    border-radius: 0.5rem;
+    background: color-mix(in srgb, var(--accent) 8%, var(--bg));
+  }
+
+  .callout--tip {
+    --accent: #22a06b;
+  }
+
+  .callout--warning {
+    --accent: #d99a06;
+  }
+
+  .callout--danger {
+    --accent: #e5484d;
+  }
+
+  .callout__title {
+    margin: 0 0 0.35rem;
+    color: color-mix(in srgb, var(--accent) 70%, var(--text));
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .callout__body {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* the content comes through the slot, so it needs :global to be reached */
+  .callout__body :global(> :first-child) {
+    margin-top: 0;
+  }
+
+  .callout__body :global(> :last-child) {
+    margin-bottom: 0;
+  }
+</style>

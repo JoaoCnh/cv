@@ -118,7 +118,6 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
   .prose :global(p),
   .prose :global(ul),
   .prose :global(ol),
-  .prose :global(pre),
   .prose :global(blockquote),
   .prose :global(table) {
     margin: 0 0 1.25rem;
@@ -156,16 +155,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
     font-size: 0.9em;
   }
 
-  .prose :global(pre) {
-    padding: 1rem 1.25rem;
-    overflow-x: auto;
-    border: 1px solid var(--rule);
-    border-radius: 0.75rem;
-    font-size: 0.9rem;
-    line-height: 1.55;
-  }
-
-  /* code inside a block shouldn't get the inline-code pill */
+  /* code blocks are styled by Expressive Code; this only stops the inline-code pill inside them */
   .prose :global(pre code) {
     padding: 0;
     background: none;
@@ -173,6 +163,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
   }
 
   .prose :global(img) {
+	width: 100%;
     max-width: 100%;
     height: auto;
     border-radius: 0.5rem;

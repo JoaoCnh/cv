@@ -4,7 +4,7 @@ import mdx from '@astrojs/mdx';
 import sitemap from '@astrojs/sitemap';
 import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
-
+import expressiveCode from 'astro-expressive-code';
 import react from '@astrojs/react';
 import svelte from '@astrojs/svelte';
 import solid from '@astrojs/solid-js';
@@ -13,6 +13,10 @@ import solid from '@astrojs/solid-js';
 export default defineConfig({
   site: 'https://joaocnh.dev',
   integrations: [
+    expressiveCode({
+      themes: ['github-dark', 'github-light'],
+      useDarkModeMediaQuery: true,
+    }),
     mdx(),
     sitemap(),
     react({ include: ['**/react/*'] }),
