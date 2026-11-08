@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="João's J favicon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102b3b"/>
+      <stop offset="1" stop-color="#061522"/>
+    </linearGradient>
+    <linearGradient id="j" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#48f5e8"/>
+      <stop offset="0.52" stop-color="#12c9ed"/>
+      <stop offset="1" stop-color="#0878f9"/>
+    </linearGradient>
+  </defs>
+  <rect width="64" height="64" rx="15" fill="url(#bg)"/>
+  <path d="M24 12.5H45.5V39.2C45.5 53.2 36.7 61 22.7 61C12.9 61 6.2 56.1 2.8 48.1L13.5 41.4C15.5 46.3 18.5 49 23 49C29.1 49 33 45.5 33 39.1V23.5H24V12.5Z" fill="url(#j)"/>
+  <path d="M24 12.5H45.5" fill="none" stroke="#b5fff9" stroke-opacity=".55" stroke-width="1.2" stroke-linecap="round"/>
+</svg>
