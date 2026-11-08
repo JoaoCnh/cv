@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { cv } from '../data/cv';
+---
+
+<Layout
+  title={`404 | ${cv.name}`}
+  name={cv.name}
+  description="This page doesn't exist. Are you sure about that?"
+>
+  <main class="notfound">
+    <p class="code" aria-hidden="true">404</p>
+    <h1>Are you sure about that?</h1>
+
+    <figure class="meme">
+      <img
+        src="/404.gif"
+        alt="Reaction gif of someone raising an eyebrow and asking: are you sure about that?"
+        loading="lazy"
+        onerror="this.hidden = true; this.nextElementSibling.hidden = false;"
+      />
+      <span class="fallback" hidden aria-hidden="true">🤨</span>
+    </figure>
+
+    <p class="path" id="path-line" hidden>
+      You asked for <code id="requested-path"></code>.
+    </p>
+
+    <p class="lead">
+      This page doesn't exist. Maybe it moved, maybe it was deleted, or maybe, let's be honest,
+      it never existed in the first place.
+    </p>
+
+    <p class="joke">
+      It's probably a typo. Or a cache. Or DNS. (It's always DNS.)
+    </p>
+
+    <nav class="actions" aria-label="Ways out">
+      <a class="button button--primary" href="/">Take me home</a>
+      <a class="button" href="/blog">Read the blog instead</a>
+    </nav>
+  </main>
+</Layout>
+
+<script>
+  // Show the address that failed, so "are you sure about that?" lands properly.
+  const line = document.getElementById('path-line');
+  const target = document.getElementById('requested-path');
+
+  if (line && target) {
+    target.textContent = window.location.pathname;
+    line.hidden = false;
+  }
+</script>
+
+<style>
+  .notfound {
+    max-width: 36rem;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+    text-align: center;
+  }
+
+  .code {
+    margin: 0;
+    font-size: clamp(4rem, 18vw, 7rem);
+    font-weight: 800;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    /* outlined number that works in light and dark mode */
+    color: transparent;
+    -webkit-text-stroke: 2px var(--text);
+  }
+
+  h1 {
+    margin: 0.5rem 0 1.5rem;
+    font-size: clamp(1.6rem, 5vw, 2.25rem);
+    line-height: 1.15;
+    text-transform: uppercase;
+  }
+
+  .meme {
+    margin: 0 auto 1.5rem;
+    max-width: 22rem;
+  }
+
+  .meme img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    border-radius: 0.75rem;
+  }
+
+  .fallback {
+    font-size: 5rem;
+    line-height: 1;
+  }
+
+  .path {
+    margin: 0 0 0.75rem;
+    color: var(--muted);
+    overflow-wrap: anywhere;
+  }
+
+  .path code {
+    padding: 0.15em 0.4em;
+    border-radius: 0.3rem;
+    background: color-mix(in srgb, var(--text) 9%, transparent);
+    font-size: 0.9em;
+  }
+
+  .lead {
+    margin: 0 0 0.75rem;
+  }
+
+  .joke {
+    margin: 0 0 2rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .button {
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    color: var(--text);
+    font-weight: 600;
+    text-decoration: none;
+    transition:
+      transform 0.2s ease,
+      border-color 0.2s ease;
+  }
+
+  .button:hover,
+  .button:focus-visible {
+    transform: translateY(-2px);
+    border-color: var(--muted);
+  }
+
+  .button--primary {
+    border-color: var(--text);
+    background: var(--text);
+    color: var(--bg);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .button {
+      transition: none;
+    }
+  }
+</style>
