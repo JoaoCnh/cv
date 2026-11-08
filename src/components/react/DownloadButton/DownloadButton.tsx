@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import './DownloadButton.css';
 
-interface Props {
+type DownloadButtonProps = {
   href: string;
   filename: string;
-}
+};
 
-export const DownloadButton = ({ href, filename }: Props) => {
+export const DownloadButton = ({ href, filename }: DownloadButtonProps) => {
   const [visible, setVisible] = useState(false);
 
   // Stay out of the way of the masthead; appear once the visitor starts scrolling.

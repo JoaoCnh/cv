@@ -418,6 +418,18 @@ const ImageSequence = ({ scrollY, images, duration }: ImageSequenceProps) => {
 };
 ```
 
+## React Example
+
+import {ImageSequence} from '../../components/react/ImageSequence/index.ts';
+
+<ImageSequence client:only="react" />
+
+## Svelte Example
+
+import SequencePlayer from '../../components/svelte/ImageSequence.svelte';
+
+<SequencePlayer client:visible />
+
 ## The End
 
 And there you have it! 🚀

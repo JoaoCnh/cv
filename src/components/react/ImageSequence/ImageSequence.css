@@ -1,0 +1,37 @@
+.seq {
+  /* where the frame sticks; keeps it just below the site's sticky header */
+  --seq-top: 4rem;
+
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+/* The tall section above creates the scroll distance; this box stays pinned while it passes. */
+.seq__pin {
+  position: sticky;
+  top: var(--seq-top);
+  height: min(calc(100vh - var(--seq-top) - 1rem), 40rem);
+  height: min(calc(100svh - var(--seq-top) - 1rem), 40rem);
+  overflow: hidden;
+  border: 1px solid var(--rule);
+  border-radius: 0.75rem;
+  /* the product frames have a white background, so the box stays white in dark mode too */
+  background: #fff;
+}
+
+.seq__canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.seq__status {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  color: #555;
+  font-size: 0.9rem;
+}
