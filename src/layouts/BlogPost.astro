@@ -10,7 +10,7 @@ type Props = CollectionEntry<'blog'>['data'];
 const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
-<Layout title={`${title} | ${cv.name}`} name={cv.name} description={description}>
+<Layout title={`${title} | ${cv.name}`} name={cv.name} description={description} image={heroImage}>
   <main class="post">
     <a class="back" href="/blog">&larr; All posts</a>
 

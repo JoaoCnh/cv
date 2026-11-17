@@ -7,15 +7,16 @@ interface Props {
   title: string;
   name: string;
   description?: string;
+  image?: ImageMetadata;
 }
 
-const { title, name, description = '' } = Astro.props;
+const { title, name, description = '', image = '' } = Astro.props;
 ---
 
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={title} description={description} />
+    <BaseHead title={title} description={description} image={image} />
   </head>
   <body>
     <Header name={name} />
