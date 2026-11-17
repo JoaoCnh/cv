@@ -50,5 +50,5 @@ const { title, description, image = FallbackImage } = Astro.props;
 <meta property="og:site_name" content="João Cunha Personal Website" />
 <meta property="twitter:title" content={title}>
 <meta property="twitter:description" content={description}>
-<meta property="twitter:image" content={image}>
-<meta property="twitter:card" content={image} />
+<meta property="twitter:image" content={new URL(image.src, Astro.url)}>
+<meta property="twitter:card" content={new URL(image.src, Astro.url)} />
